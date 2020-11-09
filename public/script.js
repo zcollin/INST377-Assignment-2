@@ -1,5 +1,19 @@
 const fullInput = [];
 
+jsonList = [];
+
+fetch('/api', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+})
+  .then((fromServer) => fromServer.json())
+  .then((jsonFromServer) => jsonList.push(...jsonFromServer))
+  .catch((err) => {
+    console.log(err);
+  });
+
 function findMatches(wordToMatch, restaurantList) {
     return restaurantList.filter(restaurant => {
         const regex = new RegExp(wordToMatch, 'gi');
@@ -17,7 +31,8 @@ function findMatches(wordToMatch, restaurantList) {
       fullInput.push(input.data);
     }
     console.log(fullInput.join(""));
-    const matchArray = findMatches(input.data, jsonFromServer);
+    wordToMatch = fullInput.join("");
+    const matchArray = findMatches(wordToMatch, jsonFromServer);
     console.log(matchArray);
   }
   
@@ -25,16 +40,5 @@ function findMatches(wordToMatch, restaurantList) {
   document.body.addEventListener('input', async (e) => {
     e.preventDefault(); // this stops whatever the browser wanted to do itself.
     const input = e;
-    fetch('/api', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(input)
-    })
-      .then((fromServer) => fromServer.json())
-      .then((jsonFromServer) => runThisWithResultsFromServer(input, jsonFromServer))
-      .catch((err) => {
-        console.log(err);
-      });
+    runThisWithResultsFromServer(input,jsonList)
   });
