@@ -1,5 +1,3 @@
-const fullInput = [];
-
 jsonList = [];
 
 fetch('/api', {
@@ -25,20 +23,13 @@ function findMatches(wordToMatch, restaurantList) {
     // console.log('jsonFromServer', jsonFromServer);
     sessionStorage.setItem('restaurantList', JSON.stringify(jsonFromServer)); // don't mess with this, we need it to provide unit testing support
     // Process your restaurants list
-    if(input.data == null) {
-      fullInput.pop();
-    } else {
-      fullInput.push(input.data);
-    }
-    console.log(fullInput.join(""));
-    wordToMatch = fullInput.join("");
-    const matchArray = findMatches(wordToMatch, jsonFromServer);
+    const matchArray = findMatches(input, jsonFromServer);
     console.log(matchArray);
   }
   
   // Leave lines 52-67 alone; do your work in the functions above
   document.body.addEventListener('input', async (e) => {
     e.preventDefault(); // this stops whatever the browser wanted to do itself.
-    const input = e;
+    input = document.querySelector('input').value;
     runThisWithResultsFromServer(input,jsonList)
   });
