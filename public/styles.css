@@ -122,7 +122,7 @@
     }
     li {
         background-color: #E66767;
-        background: linear-gradient(90deg, rgb(255, 143, 143) 0%, rgb(245, 86, 86) 35%, rgb(255, 0, 43) 100%);
+        background: linear-gradient(90deg, rgb(255, 0, 43), 0%, rgb(245, 86, 86) 35%, rgb(255, 143, 143) 100%);
         padding: 8px;
         list-style-type: none;
     }
